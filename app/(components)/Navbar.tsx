@@ -116,7 +116,7 @@ export default function Navbar({ Title }: { Title: string }) {
                     <List>
                         {navItems.map((item) => (
                             <Link key={item.name} href={item.link} passHref legacyBehavior>
-                                <ListItem button component="div">
+                                <ListItem component="div">
                                     <ListItemText primary={item.name} />
                                 </ListItem>
                             </Link>

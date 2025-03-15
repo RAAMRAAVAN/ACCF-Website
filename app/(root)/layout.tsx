@@ -1,19 +1,24 @@
 "use client";
 
-import { useEffect, useState, createContext, useContext } from "react";
+import { useEffect, useState, createContext, useContext, ReactNode } from "react";
 import Footer from "../(components)/Footer/Footer";
 import Header from "../(components)/Header/Header";
 import { Box } from "@mui/material";
 
-// Create Context for HospitalDetails
-const HospitalContext = createContext(null);
+// Define the expected type for hospital details
+interface HospitalDetailsType {
+    Location?: string;
+}
+
+// Create Context with a default empty object
+const HospitalContext = createContext<HospitalDetailsType | null>(null);
 
 export function useHospital() {
     return useContext(HospitalContext);
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-    const [HospitalDetails, setHospitalDetails] = useState<{ Location?: string }>({});
+export default function Layout({ children }: { children: ReactNode }) {
+    const [HospitalDetails, setHospitalDetails] = useState<HospitalDetailsType | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

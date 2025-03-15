@@ -42,7 +42,7 @@ const Header = (props) => {
                     <h1 style={{ fontSize: "20px", color: "brown", fontWeight: "bold" }}>{HospitalDetails.name}</h1> {/* Display hospital name */}
                     <h5 style={{ fontSize: "12px", color: "brown" }}>A Unit Of Assam Cancer Care Foundation</h5>
                 </div>
-                <Image src={HospitalDetails.Logo} alt="logo" width={60} height={60} style={{ marginLeft: "20px" }} />
+                {/* <Image src={HospitalDetails.Logo} alt="logo" width={60} height={60} style={{ marginLeft: "20px" }} /> */}
             </div>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100", height: "100" }}>
                 <h1 className="gradient-text" style={{ fontSize: "20", fontWeight: "bolder", fontStyle: "inherit" }}>FOR QUERY & APPOINTMENT, CALL  18003454325</h1>

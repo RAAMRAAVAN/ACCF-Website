@@ -1,18 +1,18 @@
-// app/api/news-and-events/route.js
-import { sql, poolPromise } from '../../../lib/db';
+// pages/api/aboutus.js
+import clientPromise from '../../../lib/mongodb';
+import HospitalID from '../../(components)/Global'; // Ensure this is correctly set
 import { NextResponse } from 'next/server';
-import HospitalID from "../../(components)/Global";
-export async function GET(request) {
+
+export async function GET() {
   try {
+    const client = await clientPromise;
+    const db = client.db('HIMS'); // Replace with your actual database name
+    const collection = db.collection('NewsAndEvents');
 
-    const pool = await poolPromise;
-    const result = await pool
-      .request()
-      .input('HospitalID', sql.Int, parseInt(HospitalID, 10))
-      .query('SELECT * FROM NewsAndEvents WHERE HospitalID = @HospitalID');
+    const result = await collection.find({ HospitalID: parseInt(HospitalID, 10) }).toArray();
 
-    if (result.recordset.length > 0) {
-      return NextResponse.json({ result: result.recordset });
+    if (result.length > 0) {
+      return NextResponse.json({ result });
     } else {
       return NextResponse.json({ error: 'No records found' }, { status: 404 });
     }

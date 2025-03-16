@@ -2,12 +2,10 @@ import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 
-const ALLOWED_ORIGIN = "http://localhost:3000"; // Set allowed frontend URL
-
 // Function to set CORS headers
 function setCorsHeaders(response) {
     response.headers.set("Access-Control-Allow-Credentials", "true");
-    response.headers.set("Access-Control-Allow-Origin", ALLOWED_ORIGIN); // Allow frontend domain
+    response.headers.set("Access-Control-Allow-Origin", "*"); // Allow all origins
     response.headers.set("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     response.headers.set("Access-Control-Allow-Headers", "Content-Type");
     return response;

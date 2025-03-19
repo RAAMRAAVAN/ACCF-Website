@@ -1,7 +1,7 @@
 // app/api/hospital/route.js
 import clientPromise from '../../../lib/mongodb';
 import { NextResponse } from 'next/server';
-import HospitalID from "../../(components)/Global";
+// import HospitalID from "../../(components)/Global";
 export async function GET(request) {
   try {
     const client = await clientPromise;

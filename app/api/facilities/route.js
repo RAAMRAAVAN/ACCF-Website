@@ -1,14 +1,21 @@
-// app/api/facilities/route.js
 import clientPromise from '../../../lib/mongodb';
 import { NextResponse } from 'next/server';
-import HospitalID from "../../(components)/Global";
-export async function GET() {
+
+export async function GET(req) {
   try {
     const client = await clientPromise;
     const db = client.db('HIMS'); // Replace with your actual database name
     const collection = db.collection('Facilities');
 
-    const result = await collection.find({ HospitalID: HospitalID }).toArray();
+    // Extract HospitalID from query parameters
+    const { searchParams } = new URL(req.url);
+    const HospitalID = searchParams.get('HospitalID'); // Get HospitalID from URL
+    // console.log("HospitalID =", HospitalID);
+    if (!HospitalID) {
+      return NextResponse.json({ error: 'HospitalID is required' }, { status: 400 });
+    }
+
+    const result = await collection.find({ HospitalID: Number(HospitalID) }).toArray();
 
     if (result.length > 0) {
       return NextResponse.json({ result });
